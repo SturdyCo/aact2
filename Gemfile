@@ -20,7 +20,10 @@ gem "title"
 gem "uglifier"
 gem "jbuilder"
 gem "rails-erd"
-gem "faraday"
+gem 'rest-client'
+gem 'rubyzip'
+gem 'enumerize'
+gem 'bulk_insert'
 
 group :development do
   gem "quiet_assets"
@@ -53,6 +56,7 @@ group :test do
   gem "simplecov", require: false
   gem "timecop"
   gem "webmock"
+  gem "vcr"
 end
 
 group :staging, :production do
