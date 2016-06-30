@@ -28,11 +28,10 @@ module ClinicalTrials
       file.write(download)
       file.size
 
-      Zip::File.open(file.path) do |zipfile|
-        zipfile.each do |file|
-          study_xml = file.get_input_stream.read
-          create_study_xml_record(study_xml)
-        end
+      zipfiles = Zip::File.open(file.path)
+      zipfiles.each do |file|
+        study_xml = file.get_input_stream.read
+        create_study_xml_record(study_xml)
       end
 
       load_event.complete
@@ -80,7 +79,7 @@ module ClinicalTrials
 
       existing_study = Study.find_by(nct_id: nct_id)
 
-      if new_study?(study_xml)
+      if !existing_study
         study_record = Study.new({
           xml: study,
           nct_id: nct_id
@@ -107,19 +106,9 @@ module ClinicalTrials
       Nokogiri::XML(study).xpath('//nct_id').text
     end
 
-    def new_study?(study)
-      found = Study.find_by(nct_id: extract_nct_id_from_study(study))
-
-      if found
-        false
-      else
-        true
-      end
-    end
-
     def study_xml_changed?(existing_study_xml:, new_study_xml:)
       existing_study_xml.diff(new_study_xml) do |change,node|
-        return true if !change.blank? && node.parent.name != 'download_date'
+        return true if change.present? && node.parent.name != 'download_date'
       end
       false
     end
