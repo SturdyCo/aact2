@@ -4,6 +4,6 @@ namespace :backup_to_s3 do
     entry = "#{ENV['RDS_DB_HOSTNAME']}:*:*:#{ENV['RDS_DB_SUPER_USERNAME']}:#{ENV['RDS_DB_SUPER_PASSWORD']}"
     `echo '#{entry}' > ~/.pgpass;
       chmod 0600 ~/.pgpass;
-      sh backup_to_s3.sh`
+      bash backup_to_s3.sh -v`
   end
 end
