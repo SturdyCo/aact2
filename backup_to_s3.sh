@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo 'Starting database backup to S3!'
+
 backupTime=`date +%Y%m%d-%H:%M`
 S3Bucket=aact2
 RDSHostname=aact2-main.cbj0v72pdrrv.us-east-1.rds.amazonaws.com
