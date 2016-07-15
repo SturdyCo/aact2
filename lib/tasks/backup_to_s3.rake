@@ -5,7 +5,7 @@ namespace :backup_to_s3 do
     `bash backup_to_s3.sh`
     %x(
     pg_dump -Fc #{ENV['RDS_DB_READONLY_DBNAME']} -h #{ENV['RDS_DB_HOSTNAME']} -U #{ENV['RDS_DB_SUPER_USERNAME']} | gzip -9 | \
-      s3cmd put - s3://#{ENV['S3_BUCKET_NAME']}/postgres.#{ENV['RDS_DB_READONLY_DBNAME']}.dump.#{Time.now}.gz
+      s3cmd put - s3://#{ENV['S3_BUCKET_NAME']}/postgres.#{ENV['RDS_DB_READONLY_DBNAME']}.dump.#{Date.today.to_s}.gz
     )
     puts "Finished S3 backup"
   end
