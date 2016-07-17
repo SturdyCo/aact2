@@ -3,7 +3,7 @@ section.homeHero {
   display: block;
   margin: 0 auto;
   padding: 20px;
-  text-align: left;
+  text-align: center;;
   position: relative;
 
   img.homeBg {
@@ -78,91 +78,8 @@ section.homeHero {
   }
 
   div.logoBlock {
-    @include display-flex;
-    @include align-items(center);
-    @include justify-content(center);
     margin-bottom: 2rem;
-
-    @include MQ(M) {
-      margin-bottom: 0px;
-      @include flex-direction(column);
-      @include align-items(left);
-    }
-  }
-
-  nav {
-    margin-bottom: 40px;
     text-align: center;
-
-    i {
-      color: $white;
-      font-size: 42px;
-      display: block;
-      margin-bottom: 5px;
-      position: absolute;
-      @include center(xy);
-      @include transition(all 250ms ease);
-    }
-
-    span {
-      color: $secondary;
-      font-size: 8px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      position: absolute;
-      @include center(x);
-      bottom: -25px;
-      width: 100%;
-      @include transition(all 250ms ease);
-      text-align: center;
-    }
-
-    @include MQ(M) {
-      margin-bottom: 0px;
-
-      i {
-        font-size: 36px;
-      }
-
-      span {
-        bottom: -25px;
-      }
-    }
-
-    @include MQ(L) {
-      span {
-        opacity: 0;
-      }
-    }
-  }
-
-  a.navItem {
-    display: inline-block;
-    border: 1px solid $primary;
-    border-radius: 50%;
-    position: relative;
-    background-color: $primary;
-    margin: 0px;
-    width: 60px;
-    height: 60px;
-    margin: 0px 10px;
-
-    @include MQ(M) {
-      margin: 0px;
-      width: 80px;
-      height: 80px;
-      margin-left: 2rem;
-    }
-
-    &:hover {
-      span {
-        opacity: 1;
-      }
-
-      i {
-        font-size: 40px;
-      }
-    }
   }
 
   @include MQ(M) {
@@ -172,17 +89,21 @@ section.homeHero {
     }
 
     h2 {
-      font-size: 3.25rem;
-      max-width: 70%;
+      font-size: 1.8rem;
+      max-width: 55%;
+      display: block;
+      margin: 0 auto;
+      margin-bottom: 1rem;
     }
 
     p, a {
-      font-size: 1.25rem;
+      font-size: 1rem;
     }
 
     p {
-      max-width: 60%;
-      margin-bottom: 40px;
+      text-align: left;
+      max-width: 65%;
+      margin: 0 auto;
     }
   }
 }
@@ -285,3 +206,60 @@ div.credentialRow {
     padding: 10px;
   }
 }
+
+
+
+  nav.homeNav {
+    @include display-flex;
+    @include justify-content(space-between);
+    text-align: center;
+    margin-bottom: 40px;
+    width: 100%;
+    padding: 60px 100px;
+
+    i {
+      color: $white;
+      font-size: 42px;
+      display: block;
+      position: absolute;
+      @include center(xy);
+      @include transition(all 250ms ease);
+    }
+
+    span {
+      color: $grey;
+      font-size: .9rem;
+      text-transform: uppercase;
+      position: absolute;
+      @include center(x);
+      bottom: -35px;
+      text-align: center;
+      display: block;
+      min-width: 200px;
+      font-weight: bold;
+    }
+  }
+
+  a.navItem {
+    display: inline-block;
+    border: 1px solid $primary;
+    border-radius: 50%;
+    position: relative;
+    background-color: $primary;
+    margin: 0px;
+    width: 60px;
+    height: 60px;
+
+    @include MQ(M) {
+      margin: 0px;
+      width: 80px;
+      height: 80px;
+    }
+
+    &:hover {
+
+      i {
+        font-size: 40px;
+      }
+    }
+  }
