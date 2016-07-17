@@ -2,9 +2,9 @@
 section.homeHero {
   display: block;
   margin: 0 auto;
-  padding: 20px;
   text-align: center;;
   position: relative;
+  padding: 100px 0px;
 
   img.homeBg {
     display: none;
@@ -140,7 +140,6 @@ aside.docsMenu {
 
 
 section.documentation {
-  margin-bottom: 700px;
 
   h2 {
     font-size: 2.2rem;
@@ -209,57 +208,61 @@ div.credentialRow {
 
 
 
-  nav.homeNav {
-    @include display-flex;
-    @include justify-content(space-between);
+nav.homeNav {
+  @include display-flex;
+  @include justify-content(space-between);
+  text-align: center;
+  margin-bottom: 40px;
+  width: 100%;
+  padding: 60px 20px;
+
+  i {
+    color: $white;
+    font-size: 42px;
+    display: block;
+    position: absolute;
+    @include center(xy);
+    @include transition(all 250ms ease);
+  }
+
+  span {
+    color: $grey;
+    font-size: .9rem;
+    text-transform: uppercase;
+    position: absolute;
+    @include center(x);
+    bottom: -35px;
     text-align: center;
-    margin-bottom: 40px;
-    width: 100%;
-    padding: 60px 100px;
+    display: block;
+    min-width: 200px;
+    font-weight: bold;
+  }
+}
+
+a.navItem {
+  display: inline-block;
+  border: 1px solid $primary;
+  border-radius: 50%;
+  position: relative;
+  background-color: $primary;
+  margin: 0px;
+  width: 60px;
+  height: 60px;
+
+  @include MQ(M) {
+    margin: 0px;
+    width: 80px;
+    height: 80px;
+  }
+
+  &:hover {
 
     i {
-      color: $white;
-      font-size: 42px;
-      display: block;
-      position: absolute;
-      @include center(xy);
-      @include transition(all 250ms ease);
-    }
-
-    span {
-      color: $grey;
-      font-size: .9rem;
-      text-transform: uppercase;
-      position: absolute;
-      @include center(x);
-      bottom: -35px;
-      text-align: center;
-      display: block;
-      min-width: 200px;
-      font-weight: bold;
+      font-size: 40px;
     }
   }
+}
 
-  a.navItem {
-    display: inline-block;
-    border: 1px solid $primary;
-    border-radius: 50%;
-    position: relative;
-    background-color: $primary;
-    margin: 0px;
-    width: 60px;
-    height: 60px;
-
-    @include MQ(M) {
-      margin: 0px;
-      width: 80px;
-      height: 80px;
-    }
-
-    &:hover {
-
-      i {
-        font-size: 40px;
-      }
-    }
-  }
+div.homeTile {
+  background-color: $primary;
+}
