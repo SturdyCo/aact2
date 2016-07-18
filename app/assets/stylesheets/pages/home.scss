@@ -227,7 +227,7 @@ nav.homeNav {
 
   span {
     color: $grey;
-    font-size: .9rem;
+    font-size: 1.1rem;
     text-transform: uppercase;
     position: absolute;
     @include center(x);
@@ -294,6 +294,22 @@ a.navItem {
     right: 0;
   }
 
+  div.tileType {
+    p {
+      text-transform: uppercase;
+      font-size: .7rem;
+      color: $primary;
+      letter-spacing: 1px;
+      font-weight: bold;
+    }
+  }
+
+  div.divider {
+    width: 40px;
+    height: 2px;
+    background-color: $primary;
+  }
+
   p.learnMore {
     position: absolute;
     bottom: 2rem;
@@ -301,6 +317,10 @@ a.navItem {
     display: block;
     margin: 0px;
     color: $secondary;
+    text-transform: uppercase;
+    font-size: .7rem;
+    letter-spacing: 1px;
+    font-weight: bold;
   }
 
   &.twoThirds {
@@ -321,17 +341,40 @@ a.navItem {
 
   &.tool {
     a {
-      color: $grey;
       background-color: rgb(246,246,246);
     }
 
     h2 {
       color: $grey;
     }
+
+    p.learnMore {
+      color: rgb(192,192,192);
+    }
+
+    div.tileType {
+      p {
+        color: rgb(192,192,192);
+      }
+    }
+
+    div.divider {
+      background-color: rgb(192,192,192);
+    }
   }
 
   &.reco {
     a { background-color: $primary }
+
+    div.tileType {
+      p {
+        color: $secondary;
+      }
+    }
+
+    div.divider {
+      background-color: $secondary;
+    }
   }
 }
 
