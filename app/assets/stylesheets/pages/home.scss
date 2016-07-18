@@ -386,3 +386,31 @@ section.homeTiles {
 div.homeTile {
   @extend %tile;
 }
+
+section.credits {
+  text-align: center;
+  padding: 100px 0px;
+
+  h2 {
+    font-size: .8rem;
+    color: $primary;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: normal;
+  }
+
+  p {
+    &.creditCopy {
+      text-align: left;
+      max-width: 60%;
+      display: block;
+      margin: 0 auto;
+      margin-bottom: 1rem;
+    }
+
+    &.creditSubcopy {
+      font-size: .8rem;
+      color: rgb(192,192,192);
+    }
+  }
+}
