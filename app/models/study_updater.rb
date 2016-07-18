@@ -19,6 +19,9 @@ class StudyUpdater
   end
 
   def create_new_xml_record(nct_id)
+    if StudyXmlRecord.find_by(nct_id: nct_id).present? || Study.find_by(nct_id: nct_id).present?
+      destroy_old_record(nct_id)
+    end
     @client.download_xml_files
     extraneous_nct_ids = @client.processed_studies[:new_studies].select { |id| id != nct_id }
 

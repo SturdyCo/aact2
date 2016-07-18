@@ -27,6 +27,7 @@ describe StudyUpdater do
 
         expect(old_studies_are_gone).to eq(true)
         expect(Study.count).to eq(20)
+        expect(StudyXmlRecord.count).to eq(20)
         expect(nct_ids).to include(Study.first.nct_id)
       end
     end
