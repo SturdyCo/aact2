@@ -32,6 +32,7 @@ gem 'apipie-rails'
 gem 'kaminari'
 gem 'api-pagination'
 gem 'aws-sdk', '~> 2'
+gem 'google-api-client'
 
 group :development, :docker do
   gem "quiet_assets"
