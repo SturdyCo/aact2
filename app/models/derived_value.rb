@@ -40,16 +40,18 @@ class DerivedValue < ActiveRecord::Base
   def calc_sponsor_type
     val=study.lead_sponsor.try(:agency_class)
     return val if val=='Industry' or val=='NIH'
+
     collaborators = study.collaborators
+
     collaborators.pluck(:agency_class).each do |agency_class|
       if agency_class == 'NIH'
-        'NIH'
+        return 'NIH'
       elsif agency_class == 'Industry'
-        'Industry'
-      else
-        'Other'
+        return 'Industry'
       end
     end
+
+    return 'Other'
   end
 
   def calc_number_of_sae_subjects
