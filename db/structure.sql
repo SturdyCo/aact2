@@ -2515,6 +2515,13 @@ CREATE INDEX index_reported_events_on_subjects_affected ON reported_events USING
 -- Name: index_studies_on_nct_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
+CREATE INDEX index_sponsors_on_nct_id ON sponsors USING btree (nct_id);
+
+
+--
+-- Name: index_studies_on_nct_id; Type: INDEX; Schema: public; Owner: -
+--
+
 CREATE INDEX index_studies_on_nct_id ON studies USING btree (nct_id);
 
 
@@ -2576,4 +2583,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160608173256');
 INSERT INTO schema_migrations (version) VALUES ('20160630191037');
 
 INSERT INTO schema_migrations (version) VALUES ('20160714191041');
+
+INSERT INTO schema_migrations (version) VALUES ('20160719173303');
 

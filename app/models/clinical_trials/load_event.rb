@@ -8,6 +8,7 @@ module ClinicalTrials
       daily_import
       full_import
       table_export
+      derived_values
     )
 
     def complete

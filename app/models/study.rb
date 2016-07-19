@@ -79,7 +79,7 @@ class Study < ActiveRecord::Base
     # studies that have changed.
 
     load_event = ClinicalTrials::LoadEvent.create(
-      event_type: 'populate_studies'
+      event_type: 'derived_values'
     )
 
     batch_size = 500
