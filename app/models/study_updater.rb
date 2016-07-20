@@ -32,5 +32,6 @@ class StudyUpdater
   def create_new_study(nct_id)
     new_xml = StudyXmlRecord.find_by(nct_id: nct_id).content
     @client.import_xml_file(new_xml)
+    DerivedValue.new.create_from(Study.find_by(nct_id: nct_id)).save
   end
 end
