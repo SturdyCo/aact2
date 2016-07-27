@@ -987,7 +987,6 @@ CREATE TABLE outcome_analyses (
     ci_lower_limit numeric,
     ci_upper_limit numeric,
     method character varying,
-    description text,
     group_description text,
     method_description text,
     estimate_description text,
