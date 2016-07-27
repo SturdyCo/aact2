@@ -21,6 +21,8 @@ class OutcomeAnalysis < StudyRelationship
       opts[:ci_n_sides]=xml.xpath('ci_n_sides').text
       opts[:ci_lower_limit]=xml.xpath('ci_lower_limit').text
       opts[:ci_upper_limit]=xml.xpath('ci_upper_limit').text
+      opts[:ci_upper_limit_na_comment]=xml.xpath('ci_upper_limit_na_comment').text
+      opts[:p_value_description]=xml.xpath('p_value_desc').text
       opts[:method]=xml.xpath('method').text
       opts[:group_description]=xml.xpath('groups_desc').text
       opts[:method_description]=xml.xpath('method_desc').text
@@ -47,6 +49,8 @@ class OutcomeAnalysis < StudyRelationship
       :ci_n_sides => get_opt(:ci_n_sides),
       :ci_lower_limit => get_opt(:ci_lower_limit),
       :ci_upper_limit => get_opt(:ci_upper_limit),
+      :ci_upper_limit_na_comment => get_opt(:ci_upper_limit_na_comment),
+      :p_value_description => get_opt(:p_value_description),
       :method => get_opt(:method),
       :group_description => get_opt(:group_description),
       :method_description => get_opt(:method_description),
