@@ -19,7 +19,6 @@ class Study < ActiveRecord::Base
   has_one  :detailed_description,  :foreign_key => 'nct_id', dependent: :delete
   has_one  :eligibility,           :foreign_key => 'nct_id', dependent: :delete
   has_one  :participant_flow,      :foreign_key => 'nct_id', dependent: :delete
-  has_one  :result_detail,         :foreign_key => 'nct_id', dependent: :delete
   has_one  :calculated_value,      :foreign_key => 'nct_id', dependent: :delete
   has_one  :study_xml_record,      :foreign_key => 'nct_id'
 
@@ -111,7 +110,6 @@ class Study < ActiveRecord::Base
     BriefSummary.new.create_from(opts).save
     Eligibility.new.create_from(opts).save
     ParticipantFlow.new.create_from(opts).save
-    ResultDetail.new.create_from(opts).save
     BaselineMeasure.create_all_from(opts)
     BrowseCondition.create_all_from(opts)
     BrowseIntervention.create_all_from(opts)
@@ -205,11 +203,11 @@ class Study < ActiveRecord::Base
   end
 
   def recruitment_details
-    result_detail.try(:recruitment_details)
+    participant_flow.try(:recruitment_details)
   end
 
   def pre_assignment_details
-    result_detail.try(:pre_assignment_details)
+    participant_flow.try(:pre_assignment_details)
   end
 
   def attribs

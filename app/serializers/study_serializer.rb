@@ -56,8 +56,7 @@ class StudySerializer < ActiveModel::Serializer
         design: object.design.attributes,
         detailed_description: object.detailed_description.attributes,
         eligibility: object.eligibility.attributes,
-        participant_flow: object.participant_flow.attributes,
-        result_detail: object.result_detail.attributes
+        participant_flow: object.participant_flow.attributes
       }
     else
       {}
