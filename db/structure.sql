@@ -1170,7 +1170,9 @@ CREATE TABLE participant_flows (
     id integer NOT NULL,
     recruitment_details text,
     pre_assignment_details text,
-    nct_id character varying
+    nct_id character varying,
+    group_title text,
+    group_description text
 );
 
 
@@ -2583,4 +2585,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160728145421');
 INSERT INTO schema_migrations (version) VALUES ('20160728145610');
 
 INSERT INTO schema_migrations (version) VALUES ('20160728145800');
+
+INSERT INTO schema_migrations (version) VALUES ('20160728150259');
 
