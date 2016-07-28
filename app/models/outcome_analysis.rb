@@ -9,7 +9,6 @@ class OutcomeAnalysis < StudyRelationship
     return col if xml.blank?
     while xml
       opts[:xml]=xml
-      opts[:title]=xml.xpath('title')
       opts[:non_inferiority]=xml.xpath('non_inferiority').text
       opts[:non_inferiority_description]=xml.xpath('non_inferiority_desc').text
       opts[:p_value]=xml.xpath('p_value').text
@@ -37,7 +36,6 @@ class OutcomeAnalysis < StudyRelationship
     {
       :ctgov_group_id => xml.text,
       :ctgov_group_enumerator => integer_in(xml.text),
-      :title => get_opt(:title),
       :non_inferiority => get_opt(:non_inferiority),
       :non_inferiority_description => get_opt(:non_inferiority_description),
       :p_value => get_opt(:p_value),

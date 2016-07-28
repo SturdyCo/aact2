@@ -974,7 +974,6 @@ CREATE TABLE outcome_analyses (
     id integer NOT NULL,
     ctgov_group_id character varying,
     ctgov_group_enumerator integer,
-    title character varying,
     non_inferiority character varying,
     non_inferiority_description text,
     p_value numeric,
@@ -2582,4 +2581,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160809133136');
 INSERT INTO schema_migrations (version) VALUES ('20160728145421');
 
 INSERT INTO schema_migrations (version) VALUES ('20160728145610');
+
+INSERT INTO schema_migrations (version) VALUES ('20160728145800');
 
