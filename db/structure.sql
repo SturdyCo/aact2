@@ -1287,37 +1287,6 @@ ALTER SEQUENCE pma_records_id_seq OWNED BY pma_records.id;
 
 
 --
--- Name: reported_event_overviews; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE reported_event_overviews (
-    id integer NOT NULL,
-    time_frame character varying,
-    description text,
-    nct_id character varying
-);
-
-
---
--- Name: reported_event_overviews_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE reported_event_overviews_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: reported_event_overviews_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE reported_event_overviews_id_seq OWNED BY reported_event_overviews.id;
-
-
---
 -- Name: reported_events; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2028,13 +1997,6 @@ ALTER TABLE ONLY pma_records ALTER COLUMN id SET DEFAULT nextval('pma_records_id
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY reported_event_overviews ALTER COLUMN id SET DEFAULT nextval('reported_event_overviews_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY reported_events ALTER COLUMN id SET DEFAULT nextval('reported_events_id_seq'::regclass);
 
 
@@ -2396,14 +2358,6 @@ ALTER TABLE ONLY pma_records
 
 
 --
--- Name: reported_event_overviews_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY reported_event_overviews
-    ADD CONSTRAINT reported_event_overviews_pkey PRIMARY KEY (id);
-
-
---
 -- Name: reported_events_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2626,4 +2580,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160807222113');
 INSERT INTO schema_migrations (version) VALUES ('20160809133136');
 
 INSERT INTO schema_migrations (version) VALUES ('20160728145421');
+
+INSERT INTO schema_migrations (version) VALUES ('20160728145610');
 
