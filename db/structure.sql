@@ -537,7 +537,7 @@ CREATE TABLE drop_withdrawals (
     period_title character varying,
     ctgov_group_id character varying,
     ctgov_group_enumerator integer,
-    reason character varying,
+    title character varying,
     participant_count integer,
     nct_id character varying,
     group_id integer
@@ -2624,4 +2624,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160805131436');
 INSERT INTO schema_migrations (version) VALUES ('20160807222113');
 
 INSERT INTO schema_migrations (version) VALUES ('20160809133136');
+
+INSERT INTO schema_migrations (version) VALUES ('20160728145421');
 
