@@ -1,6 +1,6 @@
 class OutcomeAnalysis < StudyRelationship
   belongs_to :outcome, inverse_of: :outcome_analyses, autosave: true
-  belongs_to :group
+  belongs_to :result_group
 
   def self.create_all_from(opts)
     all=opts[:xml].xpath("analysis_list").xpath('analysis')
@@ -54,7 +54,7 @@ class OutcomeAnalysis < StudyRelationship
       :method_description => get_opt(:method_description),
       :estimate_description => get_opt(:estimate_description),
       :outcome => get_opt(:outcome),
-      :group => get_group,
+      :result_group => get_group,
     }
   end
 

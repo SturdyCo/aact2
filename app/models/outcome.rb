@@ -3,7 +3,7 @@ class Outcome < StudyRelationship
 
   attr_accessor :milestones, :drop_withdrawals
 
-  belongs_to :group
+  belongs_to :result_group
   has_many :outcome_measures, inverse_of: :outcome, autosave: true
   has_many :outcome_analyses, inverse_of: :outcome, autosave: true
 
@@ -72,7 +72,7 @@ class Outcome < StudyRelationship
       :group_title => get('title'),
       :participant_count => get_attribute('count').to_i,
       :outcome_type => get_opt(:type),
-      :group        => get_group,
+      :result_group        => get_group,
       :title        => get_opt(:title),
       :time_frame   => get_opt(:time_frame),
       :safety_issue => get_opt(:safety_issue),
@@ -94,7 +94,7 @@ class Outcome < StudyRelationship
     # But if this outcome doesn't define any groups (gid is nil), then just
     # link the outcome to the study and not to any groups.
     if !gid.nil?
-      new_group=Group.create_from(opts)
+      new_group=ResultGroup.create_from(opts)
       opts[:groups] << new_group
       return new_group
     end

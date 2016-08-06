@@ -1,6 +1,4 @@
 class DropWithdrawal < StudyRelationship
-  belongs_to :group
-
   def self.create_all_from(opts)
     DropWithdrawal.import(self.nested_pop_create(opts.merge(:name=>'drop_withdraw_reason')))
   end
@@ -13,18 +11,18 @@ class DropWithdrawal < StudyRelationship
     while xml
       opts[:title]=xml.xpath('title').text
       opts[:period_title]=xml.parent.parent.xpath('title').text
-      groups=xml.xpath("participants_list").xpath('participants')
-      group=groups.pop
-      while group
-        col << create_from(opts.merge(:xml=>group))
-        group=groups.pop
+      result_groups=xml.xpath("participants_list").xpath('participants')
+      result_group=result_groups.pop
+      while result_group
+        col << create_from(opts.merge(:xml=>result_group))
+        result_group=result_groups.pop
       end
       xml=all.pop
     end
     col.flatten
   end
 
-  def get_group
+  def get_result_group
     opts[:groups].each{|g|
       return g if g.ctgov_group_enumerator==integer_in(gid)
     }
@@ -41,7 +39,6 @@ class DropWithdrawal < StudyRelationship
       :participant_count => get_attribute('count').to_i,
       :ctgov_group_id => gid,
       :ctgov_group_enumerator => integer_in(gid),
-      :group => get_group,
     }
   end
 

@@ -1,4 +1,4 @@
-class Group < StudyRelationship
+class ResultGroup < StudyRelationship
   attr_accessor :baseline_measures
 
   has_many :outcomes
@@ -15,7 +15,7 @@ class Group < StudyRelationship
     opts[:groups]=groups
     groups
 
-    Group.import(groups)
+    ResultGroup.import(groups)
   end
 
   def attribs
