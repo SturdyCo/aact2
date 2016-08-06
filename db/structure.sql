@@ -703,42 +703,6 @@ ALTER SEQUENCE facility_investigators_id_seq OWNED BY facility_investigators.id;
 
 
 --
--- Name: groups; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE groups (
-    id integer NOT NULL,
-    ctgov_group_id character varying,
-    ctgov_group_enumerator integer,
-    group_type character varying,
-    title character varying,
-    description text,
-    participant_count integer,
-    derived_participant_count integer,
-    nct_id character varying
-);
-
-
---
--- Name: groups_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE groups_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE groups_id_seq OWNED BY groups.id;
-
-
---
 -- Name: intervention_arm_group_labels; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1429,6 +1393,42 @@ ALTER SEQUENCE result_contacts_id_seq OWNED BY result_contacts.id;
 
 
 --
+-- Name: result_groups; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE result_groups (
+    id integer NOT NULL,
+    ctgov_group_id character varying,
+    ctgov_group_enumerator integer,
+    group_type character varying,
+    title character varying,
+    description text,
+    participant_count integer,
+    derived_participant_count integer,
+    nct_id character varying
+);
+
+
+--
+-- Name: result_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE result_groups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: result_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE result_groups_id_seq OWNED BY result_groups.id;
+
+
+--
 -- Name: reviews; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1886,13 +1886,6 @@ ALTER TABLE ONLY facility_investigators ALTER COLUMN id SET DEFAULT nextval('fac
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY groups ALTER COLUMN id SET DEFAULT nextval('groups_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY intervention_arm_group_labels ALTER COLUMN id SET DEFAULT nextval('intervention_arm_group_labels_id_seq'::regclass);
 
 
@@ -2020,6 +2013,13 @@ ALTER TABLE ONLY result_agreements ALTER COLUMN id SET DEFAULT nextval('result_a
 --
 
 ALTER TABLE ONLY result_contacts ALTER COLUMN id SET DEFAULT nextval('result_contacts_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY result_groups ALTER COLUMN id SET DEFAULT nextval('result_groups_id_seq'::regclass);
 
 
 --
@@ -2231,14 +2231,6 @@ ALTER TABLE ONLY facility_investigators
 
 
 --
--- Name: groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY groups
-    ADD CONSTRAINT groups_pkey PRIMARY KEY (id);
-
-
---
 -- Name: intervention_arm_group_labels_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2388,6 +2380,14 @@ ALTER TABLE ONLY result_agreements
 
 ALTER TABLE ONLY result_contacts
     ADD CONSTRAINT result_contacts_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: result_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY result_groups
+    ADD CONSTRAINT result_groups_pkey PRIMARY KEY (id);
 
 
 --
@@ -2587,4 +2587,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160728145610');
 INSERT INTO schema_migrations (version) VALUES ('20160728145800');
 
 INSERT INTO schema_migrations (version) VALUES ('20160728150259');
+
+INSERT INTO schema_migrations (version) VALUES ('20160806150253');
 
