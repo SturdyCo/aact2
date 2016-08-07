@@ -1,6 +1,8 @@
 class DropWithdrawal < StudyRelationship
+  belongs_to :participant_flow, inverse_of: :drop_withdrawals, autosave: true
+
   def self.create_all_from(opts)
-    DropWithdrawal.import(self.nested_pop_create(opts.merge(:name=>'drop_withdraw_reason')))
+    self.nested_pop_create(opts.merge(:name=>'drop_withdraw_reason'))
   end
 
   def self.nested_pop_create(opts)

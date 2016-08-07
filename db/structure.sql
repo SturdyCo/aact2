@@ -540,7 +540,7 @@ CREATE TABLE drop_withdrawals (
     title character varying,
     participant_count integer,
     nct_id character varying,
-    group_id integer
+    participant_flow_id integer
 );
 
 
@@ -907,7 +907,7 @@ CREATE TABLE milestones (
     description text,
     participant_count integer,
     nct_id character varying,
-    group_id integer
+    participant_flow_id integer
 );
 
 
@@ -1041,7 +1041,7 @@ CREATE TABLE outcomes (
     population text,
     participant_count integer,
     nct_id character varying,
-    group_id integer
+    result_group_id integer
 );
 
 
@@ -1136,7 +1136,8 @@ CREATE TABLE participant_flows (
     pre_assignment_details text,
     nct_id character varying,
     group_title text,
-    group_description text
+    group_description text,
+    result_group_id integer
 );
 
 
@@ -1405,7 +1406,8 @@ CREATE TABLE result_groups (
     description text,
     participant_count integer,
     derived_participant_count integer,
-    nct_id character varying
+    nct_id character varying,
+    participant_flow_id integer
 );
 
 
@@ -2589,4 +2591,10 @@ INSERT INTO schema_migrations (version) VALUES ('20160728145800');
 INSERT INTO schema_migrations (version) VALUES ('20160728150259');
 
 INSERT INTO schema_migrations (version) VALUES ('20160806150253');
+
+INSERT INTO schema_migrations (version) VALUES ('20160806160213');
+
+INSERT INTO schema_migrations (version) VALUES ('20160806161040');
+
+INSERT INTO schema_migrations (version) VALUES ('20160807144001');
 

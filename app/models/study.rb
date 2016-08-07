@@ -109,7 +109,7 @@ class Study < ActiveRecord::Base
     Design.new.create_from(opts).save
     BriefSummary.new.create_from(opts).save
     Eligibility.new.create_from(opts).save
-    ParticipantFlow.new.create_from(opts).save
+    ParticipantFlow.create_all_from(opts)
     BaselineMeasure.create_all_from(opts)
     BrowseCondition.create_all_from(opts)
     BrowseIntervention.create_all_from(opts)

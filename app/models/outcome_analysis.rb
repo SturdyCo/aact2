@@ -54,7 +54,6 @@ class OutcomeAnalysis < StudyRelationship
       :method_description => get_opt(:method_description),
       :estimate_description => get_opt(:estimate_description),
       :outcome => get_opt(:outcome),
-      :result_group => get_group,
     }
   end
 

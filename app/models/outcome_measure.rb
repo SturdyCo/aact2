@@ -61,7 +61,6 @@ class OutcomeMeasure < StudyRelationship
       :dispersion => get_opt(:dispersion),
       :description => get_opt(:description),
       :outcome => get_opt(:outcome),
-      :result_group => get_group
     }
   end
 
