@@ -52,11 +52,11 @@ class StudySerializer < ActiveModel::Serializer
   def other_attributes
     if object.with_related_records
       {
-        brief_summary: object.brief_summary.attributes,
-        design: object.design.attributes,
-        detailed_description: object.detailed_description.attributes,
-        eligibility: object.eligibility.attributes,
-        participant_flow: object.participant_flow.attributes
+        brief_summary: object.brief_summary.try(:attributes),
+        design: object.design.try(:attributes),
+        detailed_description: object.detailed_description.try(:attributes),
+        eligibility: object.eligibility.try(:attributes),
+        participant_flow: object.participant_flow.try(:attributes)
       }
     else
       {}
