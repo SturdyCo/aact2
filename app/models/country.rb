@@ -1,20 +1,20 @@
 class Country < StudyRelationship
 
-  def self.top_level_label
-    '//location_countries'
-  end
-
   def self.create_all_from(opts)
-    countries = xml_entries(opts).children.collect{|xml|
-      opts[:xml]=xml
-      create_from(opts) if xml.name='country' and !trim(xml.text).blank?
-    }.compact
-
+		countries = current(opts) + removed(opts)
     Country.import(countries)
   end
 
-  def attribs
-    {:name=>xml.text}
+  def self.current(opts)
+    opts[:xml].xpath("//location_countries").collect{|xml|
+      Country.new({:name=>xml.text.strip,:nct_id=>opts[:nct_id]})
+    }
+  end
+
+  def self.removed(opts)
+    opts[:xml].xpath("//removed_countries").collect{|xml|
+      Country.new({:name=>xml.text.strip,:nct_id=>opts[:nct_id],:removed=>true})
+    }
   end
 
 end

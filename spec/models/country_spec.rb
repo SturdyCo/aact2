@@ -1,27 +1,14 @@
 require 'rails_helper'
-
-RSpec.describe Country, type: :model do
-  context 'when country exists' do
-    let!(:xml) {Nokogiri::XML(File.read('spec/support/xml_data/NCT00513591.xml'))}
-    let!(:opts) {{xml: xml, nct_id: 'NCT00513591'}}
-    let!(:country) {Country.create_all_from(opts)}
-
-    it 'should have expected country value' do
-      test_country = Country.first
-
-      expect(test_country.name).to eq('United States')
-    end
-  end
-
-  context 'when country does not exist' do
-    let!(:xml) {Nokogiri::XML(File.read('spec/support/xml_data/NCT02830269.xml'))}
-    let!(:opts) {{xml: xml, nct_id: 'NCT02830269'}}
-    let!(:country) {Country.create_all_from(opts)}
-
-    it 'should have nil value' do
-      second_test_country = Country.first
-
-      expect(second_test_country).to eq(nil)
-    end
+describe Study do
+  it "study should have expected country info" do
+    nct_id='NCT02586688'
+    xml=Nokogiri::XML(File.read("spec/support/xml_data/#{nct_id}.xml"))
+    study=Study.new({xml: xml, nct_id: nct_id}).create
+    expect(study.countries.size).to eq(2)
+    current=study.countries.select{|x|x.removed.nil?}.first
+    removed=study.countries.select{|x|!x.removed.nil?}.first
+    expect(current.name).to eq('United States')
+    expect(removed.name).to eq('Canada')
   end
 end
+
