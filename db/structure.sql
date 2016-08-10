@@ -73,7 +73,8 @@ CREATE TABLE baseline_measures (
     dispersion character varying,
     spread character varying,
     measure_description text,
-    nct_id character varying
+    nct_id character varying,
+    result_group_id integer
 );
 
 
@@ -1273,7 +1274,8 @@ CREATE TABLE reported_events (
     subjects_affected integer,
     subjects_at_risk integer,
     event_count integer,
-    nct_id character varying
+    nct_id character varying,
+    result_group_id integer
 );
 
 
@@ -1406,8 +1408,7 @@ CREATE TABLE result_groups (
     description text,
     participant_count integer,
     derived_participant_count integer,
-    nct_id character varying,
-    participant_flow_id integer
+    nct_id character varying
 );
 
 
@@ -2457,6 +2458,13 @@ ALTER TABLE ONLY study_xml_records
 
 
 --
+-- Name: index_baseline_measures_on_result_group_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_baseline_measures_on_result_group_id ON baseline_measures USING btree (result_group_id);
+
+
+--
 -- Name: index_facilities_on_nct_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -2478,6 +2486,13 @@ CREATE INDEX index_outcomes_on_nct_id ON outcomes USING btree (nct_id);
 
 
 --
+-- Name: index_outcomes_on_result_group_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_outcomes_on_result_group_id ON outcomes USING btree (result_group_id);
+
+
+--
 -- Name: index_reported_events_on_event_type; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -2489,6 +2504,13 @@ CREATE INDEX index_reported_events_on_event_type ON reported_events USING btree 
 --
 
 CREATE INDEX index_reported_events_on_nct_id ON reported_events USING btree (nct_id);
+
+
+--
+-- Name: index_reported_events_on_result_group_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_reported_events_on_result_group_id ON reported_events USING btree (result_group_id);
 
 
 --
@@ -2596,5 +2618,5 @@ INSERT INTO schema_migrations (version) VALUES ('20160806160213');
 
 INSERT INTO schema_migrations (version) VALUES ('20160806161040');
 
-INSERT INTO schema_migrations (version) VALUES ('20160807144001');
+INSERT INTO schema_migrations (version) VALUES ('20160810150431');
 
