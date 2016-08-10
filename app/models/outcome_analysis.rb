@@ -1,6 +1,6 @@
 class OutcomeAnalysis < StudyRelationship
   belongs_to :outcome, inverse_of: :outcome_analyses, autosave: true
-  belongs_to :group
+  belongs_to :result_group
 
   def self.create_all_from(opts)
     all=opts[:xml].xpath("analysis_list").xpath('analysis')
@@ -9,7 +9,6 @@ class OutcomeAnalysis < StudyRelationship
     return col if xml.blank?
     while xml
       opts[:xml]=xml
-      opts[:title]=xml.xpath('title')
       opts[:non_inferiority]=xml.xpath('non_inferiority').text
       opts[:non_inferiority_description]=xml.xpath('non_inferiority_desc').text
       opts[:p_value]=xml.xpath('p_value').text
@@ -21,6 +20,8 @@ class OutcomeAnalysis < StudyRelationship
       opts[:ci_n_sides]=xml.xpath('ci_n_sides').text
       opts[:ci_lower_limit]=xml.xpath('ci_lower_limit').text
       opts[:ci_upper_limit]=xml.xpath('ci_upper_limit').text
+      opts[:ci_upper_limit_na_comment]=xml.xpath('ci_upper_limit_na_comment').text
+      opts[:p_value_description]=xml.xpath('p_value_desc').text
       opts[:method]=xml.xpath('method').text
       opts[:group_description]=xml.xpath('groups_desc').text
       opts[:method_description]=xml.xpath('method_desc').text
@@ -35,7 +36,6 @@ class OutcomeAnalysis < StudyRelationship
     {
       :ctgov_group_id => xml.text,
       :ctgov_group_enumerator => integer_in(xml.text),
-      :title => get_opt(:title),
       :non_inferiority => get_opt(:non_inferiority),
       :non_inferiority_description => get_opt(:non_inferiority_description),
       :p_value => get_opt(:p_value),
@@ -47,12 +47,13 @@ class OutcomeAnalysis < StudyRelationship
       :ci_n_sides => get_opt(:ci_n_sides),
       :ci_lower_limit => get_opt(:ci_lower_limit),
       :ci_upper_limit => get_opt(:ci_upper_limit),
+      :ci_upper_limit_na_comment => get_opt(:ci_upper_limit_na_comment),
+      :p_value_description => get_opt(:p_value_description),
       :method => get_opt(:method),
       :group_description => get_opt(:group_description),
       :method_description => get_opt(:method_description),
       :estimate_description => get_opt(:estimate_description),
       :outcome => get_opt(:outcome),
-      :group => get_group,
     }
   end
 

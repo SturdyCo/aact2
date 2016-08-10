@@ -1,6 +1,6 @@
 class OutcomeMeasure < StudyRelationship
   belongs_to :outcome, inverse_of: :outcome_measures, autosave: true
-  belongs_to :group
+  belongs_to :result_group
   attr_accessor :category_xml
 
   def self.create_all_from(opts)
@@ -61,7 +61,6 @@ class OutcomeMeasure < StudyRelationship
       :dispersion => get_opt(:dispersion),
       :description => get_opt(:description),
       :outcome => get_opt(:outcome),
-      :group => get_group
     }
   end
 

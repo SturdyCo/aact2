@@ -1,4 +1,4 @@
-class Group < StudyRelationship
+class ResultGroup < StudyRelationship
   attr_accessor :baseline_measures
 
   has_many :outcomes
@@ -7,6 +7,9 @@ class Group < StudyRelationship
   has_many :milestones
   has_many :drop_withdrawals
 
+  # WIP
+  # belongs_to :participant_flow, inverse_of: :result_groups, autosave: true
+
   def self.create_all_from(opts)
     opts[:xml]=opts[:xml].xpath('//participant_flow')
     groups=pop_create(opts.merge(:name=>'group'))
@@ -14,8 +17,6 @@ class Group < StudyRelationship
     additional_groups=pop_create(opts.merge(:name=>'group'))
     opts[:groups]=groups
     groups
-
-    Group.import(groups)
   end
 
   def attribs

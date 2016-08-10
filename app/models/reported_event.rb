@@ -1,6 +1,8 @@
 class ReportedEvent < StudyRelationship
   extend FastCount
 
+  belongs_to :result_group
+
   def self.create_all_from(opts)
     nct_id=opts[:nct_id]
     opts[:xml]=opts[:xml].xpath("//reported_events")

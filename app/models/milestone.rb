@@ -1,8 +1,8 @@
 class Milestone < StudyRelationship
-  belongs_to :group
+  belongs_to :participant_flow, inverse_of: :milestones, autosave: true
 
   def self.create_all_from(opts)
-    Milestone.import(self.nested_pop_create(opts.merge(:name=>'milestone')))
+    self.nested_pop_create(opts.merge(:name=>'milestone'))
   end
 
   def self.nested_pop_create(opts)
@@ -27,7 +27,6 @@ class Milestone < StudyRelationship
       :participant_count => get_attribute('count').to_i,
       :description => xml.text,
       :title => get_opt('title'),
-      :group => get_group,
       :period_title => get_opt(:period_title)
     }
   end

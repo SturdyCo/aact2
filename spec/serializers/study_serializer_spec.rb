@@ -31,7 +31,6 @@ RSpec.describe StudySerializer, type: :serializer do
           detailed_description
           eligibility
           participant_flow
-          result_detail
         ).each do |rr_key|
           expect(serialized_study).to have_key(rr_key)
         end
@@ -40,14 +39,6 @@ RSpec.describe StudySerializer, type: :serializer do
         expect(serialized_study['design']).to eq(resource.design.attributes)
         expect(serialized_study['detailed_description']).to eq(resource.detailed_description.attributes)
         expect(serialized_study['eligibility']).to eq(resource.eligibility.attributes)
-        expect(serialized_study['participant_flow']["id"]).to eq(resource.participant_flow.id)
-        expect(serialized_study['participant_flow']["recruitment_details"]).to eq(resource.participant_flow.recruitment_details)
-        expect(serialized_study['participant_flow']["pre_assignment_details"]).to eq(resource.participant_flow.pre_assignment_details)
-        expect(serialized_study['participant_flow']["nct_id"]).to eq(resource.participant_flow.nct_id)
-        expect(serialized_study['result_detail']["id"]).to eq(resource.result_detail.id)
-        expect(serialized_study['result_detail']["nct_id"]).to eq(resource.result_detail.nct_id)
-        expect(serialized_study['result_detail']["pre_assignment_details"]).to eq(resource.result_detail.pre_assignment_details)
-        expect(serialized_study['result_detail']["recruitment_details"]).to eq(resource.result_detail.recruitment_details)
       end
     end
   end

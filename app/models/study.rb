@@ -19,15 +19,14 @@ class Study < ActiveRecord::Base
   has_one  :detailed_description,  :foreign_key => 'nct_id', dependent: :delete
   has_one  :eligibility,           :foreign_key => 'nct_id', dependent: :delete
   has_one  :participant_flow,      :foreign_key => 'nct_id', dependent: :delete
-  has_one  :result_detail,         :foreign_key => 'nct_id', dependent: :delete
   has_one  :calculated_value,      :foreign_key => 'nct_id', dependent: :delete
   has_one  :study_xml_record,      :foreign_key => 'nct_id'
 
   has_many :pma_mappings,          :foreign_key => 'nct_id'
   has_many :pma_records,           :foreign_key => 'nct_id', dependent: :delete_all
   has_many :design_groups,         :foreign_key => 'nct_id', dependent: :delete_all
-  has_many :design_outcomes,       :foreign_key => 'nct_id', dependent: :delete_all
-  has_many :groups,                :foreign_key => 'nct_id', dependent: :delete_all
+  has_many :design_outcomes,     :foreign_key => 'nct_id', dependent: :delete_all
+  has_many :result_groups,                :foreign_key => 'nct_id', dependent: :delete_all
   has_many :outcomes,              :foreign_key => 'nct_id', dependent: :delete_all
   has_many :outcome_analyses,      :foreign_key => 'nct_id', dependent: :delete_all
   has_many :baseline_measures,     :foreign_key => 'nct_id', dependent: :delete_all
@@ -102,16 +101,15 @@ class Study < ActiveRecord::Base
   def create
     update(attribs)
     DesignGroup.create_all_from(opts)
-    Group.create_all_from(opts)
-    Outcome.create_all_from(opts.merge(:groups=>self.groups))
-    Milestone.create_all_from(opts.merge(:groups=>self.groups))
-    DropWithdrawal.create_all_from(opts.merge(:groups=>self.groups))
+    ResultGroup.create_all_from(opts)
+    Outcome.create_all_from(opts.merge(:groups=>self.result_groups))
+    Milestone.create_all_from(opts.merge(:groups=>self.result_groups))
+    DropWithdrawal.create_all_from(opts.merge(:groups=>self.result_groups))
     DetailedDescription.new.create_from(opts).save
     Design.new.create_from(opts).save
     BriefSummary.new.create_from(opts).save
     Eligibility.new.create_from(opts).save
-    ParticipantFlow.new.create_from(opts).save
-    ResultDetail.new.create_from(opts).save
+    ParticipantFlow.create_all_from(opts)
     BaselineMeasure.create_all_from(opts)
     BrowseCondition.create_all_from(opts)
     BrowseIntervention.create_all_from(opts)
@@ -205,11 +203,11 @@ class Study < ActiveRecord::Base
   end
 
   def recruitment_details
-    result_detail.try(:recruitment_details)
+    participant_flow.try(:recruitment_details)
   end
 
   def pre_assignment_details
-    result_detail.try(:pre_assignment_details)
+    participant_flow.try(:pre_assignment_details)
   end
 
   def attribs
@@ -265,7 +263,7 @@ class Study < ActiveRecord::Base
   end
 
   def get_groups(opts)
-    self.groups=Group.create_all_from(opts)
+    self.groups=ResultGroup.create_all_from(opts)
   end
 
   def get(label)
