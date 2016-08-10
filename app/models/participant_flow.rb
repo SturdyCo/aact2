@@ -1,7 +1,9 @@
 class ParticipantFlow < StudyRelationship
   has_many :milestones, inverse_of: :participant_flow, autosave: true
   has_many :drop_withdrawals, inverse_of: :participant_flow, autosave: true
-  has_many :result_groups, inverse_of: :participant_flow, autosave: true
+
+  # WIP
+  # has_many :result_groups, inverse_of: :participant_flow, autosave: true
 
   def self.top_level_label
     '//participant_flow'

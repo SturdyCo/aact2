@@ -7,7 +7,8 @@ class ResultGroup < StudyRelationship
   has_many :milestones
   has_many :drop_withdrawals
 
-  belongs_to :participant_flow, inverse_of: :result_groups, autosave: true
+  # WIP
+  # belongs_to :participant_flow, inverse_of: :result_groups, autosave: true
 
   def self.create_all_from(opts)
     opts[:xml]=opts[:xml].xpath('//participant_flow')
