@@ -956,7 +956,9 @@ CREATE TABLE outcome_analyses (
     estimate_description text,
     nct_id character varying,
     outcome_id integer,
-    group_id integer
+    group_id integer,
+    ci_upper_limit_na_comment text,
+    p_value_description text
 );
 
 
@@ -2598,11 +2600,7 @@ INSERT INTO schema_migrations (version) VALUES ('20160726124957');
 
 INSERT INTO schema_migrations (version) VALUES ('20160727224053');
 
-INSERT INTO schema_migrations (version) VALUES ('20160805131436');
-
-INSERT INTO schema_migrations (version) VALUES ('20160807222113');
-
-INSERT INTO schema_migrations (version) VALUES ('20160809133136');
+INSERT INTO schema_migrations (version) VALUES ('20160727225851');
 
 INSERT INTO schema_migrations (version) VALUES ('20160728145421');
 
@@ -2612,11 +2610,17 @@ INSERT INTO schema_migrations (version) VALUES ('20160728145800');
 
 INSERT INTO schema_migrations (version) VALUES ('20160728150259');
 
+INSERT INTO schema_migrations (version) VALUES ('20160805131436');
+
 INSERT INTO schema_migrations (version) VALUES ('20160806150253');
 
 INSERT INTO schema_migrations (version) VALUES ('20160806160213');
 
 INSERT INTO schema_migrations (version) VALUES ('20160806161040');
+
+INSERT INTO schema_migrations (version) VALUES ('20160807222113');
+
+INSERT INTO schema_migrations (version) VALUES ('20160809133136');
 
 INSERT INTO schema_migrations (version) VALUES ('20160810150431');
 
