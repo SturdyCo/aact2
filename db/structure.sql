@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.4.4
+-- Dumped from database version 9.4.1
 -- Dumped by pg_dump version 9.5.3
 
 SET statement_timeout = 0;
@@ -2469,7 +2469,6 @@ ALTER TABLE ONLY study_xml_records
 CREATE INDEX index_baseline_measures_on_result_group_id ON baseline_measures USING btree (result_group_id);
 
 
---
 -- Name: index_facilities_on_nct_id; Type: INDEX; Schema: public; Owner: -
 --
 
