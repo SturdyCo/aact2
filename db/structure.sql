@@ -60,21 +60,21 @@ SET default_with_oids = false;
 
 CREATE TABLE baseline_measures (
     id integer NOT NULL,
-    ctgov_group_id character varying,
-    ctgov_group_enumerator integer,
     category character varying,
     title character varying,
     description text,
     units character varying,
-    param character varying,
-    measure_value character varying,
-    lower_limit character varying,
-    upper_limit character varying,
-    dispersion character varying,
-    spread character varying,
-    measure_description text,
-    nct_id character varying,
     result_group_id integer
+    nct_id character varying,
+    population character varying,
+    ctgov_group_code character varying,
+    param_type character varying,
+    param_value character varying,
+    dispersion_type character varying,
+    dispersion_value character varying,
+    dispersion_lower_limit character varying,
+    dispersion_upper_limit character varying,
+    explanation_of_na character varying
 );
 
 
@@ -203,7 +203,13 @@ CREATE TABLE calculated_values (
     number_of_sae_subjects integer,
     study_rank character varying,
     nct_id character varying,
-    registered_in_calendar_year integer
+    registered_in_calendar_year integer,
+    start_date date,
+    verification_date date,
+    primary_completion_date date,
+    completion_date date,
+    first_received_results_date date,
+    nlm_download_date date
 );
 
 
@@ -1261,23 +1267,22 @@ ALTER SEQUENCE pma_records_id_seq OWNED BY pma_records.id;
 
 CREATE TABLE reported_events (
     id integer NOT NULL,
-    ctgov_group_id character varying,
-    ctgov_group_enumerator integer,
-    group_title character varying,
-    group_description text,
     description text,
     time_frame text,
-    category character varying,
     event_type character varying,
-    frequency_threshold character varying,
     default_vocab character varying,
     default_assessment character varying,
-    title character varying,
     subjects_affected integer,
     subjects_at_risk integer,
     event_count integer,
     nct_id character varying,
     result_group_id integer
+    ctgov_group_code character varying,
+    organ_system character varying,
+    adverse_event_term character varying,
+    frequency_threshold integer,
+    vocab character varying,
+    assessment character varying
 );
 
 
@@ -1648,14 +1653,6 @@ CREATE TABLE studies (
     completion_date date,
     first_received_results_date date,
     download_date date,
-    start_date_str character varying,
-    first_received_date_str character varying,
-    verification_date_str character varying,
-    last_changed_date_str character varying,
-    primary_completion_date_str character varying,
-    completion_date_str character varying,
-    first_received_results_date_str character varying,
-    download_date_str character varying,
     completion_date_type character varying,
     primary_completion_date_type character varying,
     org_study_id character varying,
@@ -1686,7 +1683,13 @@ CREATE TABLE studies (
     updated_at timestamp without time zone NOT NULL,
     first_received_results_disposition_date date,
     plan_to_share_ipd character varying,
-    plan_to_share_description character varying
+    plan_to_share_description character varying,
+    start_date_month_day character varying,
+    verification_date_month_day character varying,
+    primary_completion_date_month_day character varying,
+    completion_date_month_day character varying,
+    first_received_results_date_month_day character varying,
+    nlm_download_date_description character varying
 );
 
 
@@ -2619,6 +2622,12 @@ INSERT INTO schema_migrations (version) VALUES ('20160806160213');
 INSERT INTO schema_migrations (version) VALUES ('20160806161040');
 
 INSERT INTO schema_migrations (version) VALUES ('20160807222113');
+
+INSERT INTO schema_migrations (version) VALUES ('20160807222740');
+
+INSERT INTO schema_migrations (version) VALUES ('20160808024029');
+
+INSERT INTO schema_migrations (version) VALUES ('20160809010254');
 
 INSERT INTO schema_migrations (version) VALUES ('20160809133136');
 
