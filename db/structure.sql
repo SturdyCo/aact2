@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.5.3
+-- Dumped from database version 9.4.4
 -- Dumped by pg_dump version 9.5.3
 
 SET statement_timeout = 0;
@@ -1815,46 +1815,6 @@ ALTER SEQUENCE study_xml_records_id_seq OWNED BY study_xml_records.id;
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE users (
-    id integer NOT NULL,
-    email character varying DEFAULT ''::character varying NOT NULL,
-    encrypted_password character varying DEFAULT ''::character varying NOT NULL,
-    reset_password_token character varying,
-    reset_password_sent_at timestamp without time zone,
-    remember_created_at timestamp without time zone,
-    sign_in_count integer DEFAULT 0 NOT NULL,
-    current_sign_in_at timestamp without time zone,
-    last_sign_in_at timestamp without time zone,
-    current_sign_in_ip character varying,
-    last_sign_in_ip character varying,
-    first_name character varying,
-    last_name character varying
-);
-
-
---
--- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE users_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE users_id_seq OWNED BY users.id;
-
-
---
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -2195,13 +2155,6 @@ ALTER TABLE ONLY study_references ALTER COLUMN id SET DEFAULT nextval('study_ref
 --
 
 ALTER TABLE ONLY study_xml_records ALTER COLUMN id SET DEFAULT nextval('study_xml_records_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
 
 
 --
@@ -2597,14 +2550,6 @@ ALTER TABLE ONLY study_xml_records
 
 
 --
--- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY users
-    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
-
-
---
 -- Name: index_facilities_on_nct_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -2654,20 +2599,6 @@ CREATE INDEX index_studies_on_nct_id ON studies USING btree (nct_id);
 
 
 --
--- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
-
-
---
--- Name: index_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (reset_password_token);
-
-
---
 -- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -2678,15 +2609,13 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO "$user", public;
+SET search_path TO "$user",public;
 
 INSERT INTO schema_migrations (version) VALUES ('20150409002646');
 
 INSERT INTO schema_migrations (version) VALUES ('20150415155251');
 
 INSERT INTO schema_migrations (version) VALUES ('20150629193710');
-
-INSERT INTO schema_migrations (version) VALUES ('20160214191640');
 
 INSERT INTO schema_migrations (version) VALUES ('20160215004455');
 
