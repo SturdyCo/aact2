@@ -111,15 +111,4 @@ class CalculatedValue < ActiveRecord::Base
     recs
   end
 
-  def calc_months_to_report_results
-    return nil if study.first_received_results_date.nil? or study.primary_completion_date.nil?
-    ((study.first_received_results_date.to_time -  study.primary_completion_date.to_time)/1.month.second).to_i
-  end
-
-  def calc_enrollment
-    # TODO = this is just a stub - find better way to calculate
-    study.groups.each{|g|g.set_participant_count}
-    study.groups.sum(:derived_participant_count)
-  end
-
 end

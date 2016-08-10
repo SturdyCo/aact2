@@ -64,17 +64,18 @@ CREATE TABLE baseline_measures (
     title character varying,
     description text,
     units character varying,
-    result_group_id integer
     nct_id character varying,
     population character varying,
     ctgov_group_code character varying,
+    group_id integer,
     param_type character varying,
     param_value character varying,
     dispersion_type character varying,
     dispersion_value character varying,
     dispersion_lower_limit character varying,
     dispersion_upper_limit character varying,
-    explanation_of_na character varying
+    explanation_of_na character varying,
+    result_group_id integer
 );
 
 
@@ -1276,13 +1277,14 @@ CREATE TABLE reported_events (
     subjects_at_risk integer,
     event_count integer,
     nct_id character varying,
-    result_group_id integer
     ctgov_group_code character varying,
+    group_id integer,
     organ_system character varying,
     adverse_event_term character varying,
     frequency_threshold integer,
     vocab character varying,
-    assessment character varying
+    assessment character varying,
+    result_group_id integer
 );
 
 
@@ -2469,6 +2471,7 @@ ALTER TABLE ONLY study_xml_records
 CREATE INDEX index_baseline_measures_on_result_group_id ON baseline_measures USING btree (result_group_id);
 
 
+--
 -- Name: index_facilities_on_nct_id; Type: INDEX; Schema: public; Owner: -
 --
 
