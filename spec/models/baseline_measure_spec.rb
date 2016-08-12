@@ -1,12 +1,13 @@
 require 'rails_helper'
 
-describe Study do
+describe BaselineMeasure do
   it "study should have expected baseline measure values" do
-    xml=Nokogiri::XML(File.read('spec/support/xml_data/NCT02028676.xml'))
     nct_id='NCT02028676'
+    xml=Nokogiri::XML(File.read("spec/support/xml_data/#{nct_id}.xml"))
     study=Study.new({xml: xml, nct_id: nct_id}).create
 
     expect(study.nct_id).to eq(nct_id)
+    expect(BaselineMeasure.count).to eq(390)
     expect(study.baseline_measures.size).to eq(390)
 
     baselines=(study.baseline_measures.select{|m|m.title=='Gender'})
@@ -18,13 +19,14 @@ describe Study do
     expect(female_b1_array.size).to eq (1)
     female_b1=female_b1_array.first
     expect(female_b1.description).to eq('')
+    expect(female_b1.result_group.result_type).to eq('Baseline Measure')
     expect(female_b1.param_type).to eq('Number')
     expect(female_b1.param_value).to eq('308')
     expect(female_b1.units).to eq('participants')
     expect(female_b1.explanation_of_na).to eq('')
-    expect(female_b1.group.ctgov_group_id).to eq(female_b1.ctgov_group_code)
-    expect(female_b1.group.title).to eq('Clinically Driven Monitoring (CDM)')
-    expect(female_b1.group.description).to eq('Clinically Driven Monitoring (CDM): Participants were examined by a doctor and had routine full blood count with white cell differential, lymphocyte subsets (CD4, CD8), biochemistry tests (bilirubin, urea, creatinine, aspartate aminotransferase, alanine aminotransferase) at screening, randomisation (lymphocytes only), weeks 4, 8, and 12, then every 12 weeks. Screening results were used to assess eligibility. All subsequent results were only returned if requested for clinical management (authorised by centre project leaders); haemoglobin results at week 8 were automatically returned on the basis of early anaemia in a previous adult trial as were grade 4 laboratory toxicities (protocol safety criteria). Total lymphocytes and CD4 tests were never returned for CDM participants, but for all children other investigations (including tests from the routine panels) could be requested and concomitant drugs prescribed, as clinically indicated at extra patient-initiated or scheduled visits.')
+    expect(female_b1.result_group.ctgov_group_code).to eq(female_b1.ctgov_group_code)
+    expect(female_b1.result_group.title).to eq('Clinically Driven Monitoring (CDM)')
+    expect(female_b1.result_group.description).to eq('Clinically Driven Monitoring (CDM): Participants were examined by a doctor and had routine full blood count with white cell differential, lymphocyte subsets (CD4, CD8), biochemistry tests (bilirubin, urea, creatinine, aspartate aminotransferase, alanine aminotransferase) at screening, randomisation (lymphocytes only), weeks 4, 8, and 12, then every 12 weeks. Screening results were used to assess eligibility. All subsequent results were only returned if requested for clinical management (authorised by centre project leaders); haemoglobin results at week 8 were automatically returned on the basis of early anaemia in a previous adult trial as were grade 4 laboratory toxicities (protocol safety criteria). Total lymphocytes and CD4 tests were never returned for CDM participants, but for all children other investigations (including tests from the routine panels) could be requested and concomitant drugs prescribed, as clinically indicated at extra patient-initiated or scheduled visits.')
 
     gender_period_2=study.baseline_measures.select{|x|x.title=='Gender, Male/Female: Period 2 (trial enrollment, induction ART)'}
     expect(gender_period_2.size).to eq(20)
