@@ -12,7 +12,6 @@ describe Study do
     it { should have_one(:detailed_description).dependent(:delete) }
     it { should have_one(:eligibility).dependent(:delete) }
     it { should have_one(:participant_flow).dependent(:delete) }
-    it { should have_one(:result_detail).dependent(:delete) }
     it { should have_one(:calculated_value).dependent(:delete) }
     it { should have_one(:study_xml_record) }
 
@@ -33,7 +32,6 @@ describe Study do
     it { should have_many(:responsible_parties).dependent(:delete_all) }
     it { should have_many(:result_agreements).dependent(:delete_all) }
     it { should have_many(:result_contacts).dependent(:delete_all) }
-    it { should have_many(:secondary_ids).dependent(:delete_all) }
     it { should have_many(:sponsors).dependent(:delete_all) }
     it { should have_many(:references).dependent(:delete_all) }
   end

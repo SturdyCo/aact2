@@ -6,20 +6,15 @@ class DesignGroup < StudyRelationship
 
   def self.create_all_from(opts)
     objects = super
-    DesignGroup.import(objects)
+    import(objects)
   end
 
   def attribs
     {
-      :ctgov_group_id => get_attribute('group_id'),
       :group_type => get('arm_group_type'),
-      :label => get('arm_group_label'),
+      :title => get('arm_group_label'),
       :description => get('description'),
     }
-  end
-
-  def type
-    group_type
   end
 
 end
