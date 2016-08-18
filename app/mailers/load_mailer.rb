@@ -16,6 +16,7 @@ class LoadMailer < ApplicationMailer
   def send_notification(email, load_event)
     @load_event = load_event
 
+    puts "Sending notification to #{email}"
     mail(to: email, subject: 'Load completed!')
   end
 end
